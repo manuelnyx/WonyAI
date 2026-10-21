@@ -1,0 +1,320 @@
+/* WonyAI — universal responsive UI (Android, iOS/Safari, Windows, macOS, Linux) */
+
+:root {
+    --bg: #0e0e0e;
+    --bg-sidebar: #111111;
+    --bg-card: #1a1a1a;
+    --border: #2a2a2a;
+    --red: #dc2626;
+    --red-dim: rgba(220, 38, 38, 0.10);
+    --red-border: rgba(220, 38, 38, 0.25);
+    --text: #f1f5f9;
+    --text-muted: #64748b;
+    --text-sub: #94a3b8;
+    --radius: 10px;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --toggle-size: 2.75rem;
+    --chat-max: min(51.25rem, 100%);
+    --input-reserve: clamp(5.5rem, 12vh, 8rem);
+}
+
+html, body,
+[data-testid="stApp"],
+[data-testid="stAppViewContainer"] {
+    background: var(--bg) !important;
+    color: var(--text) !important;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden !important;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+[data-testid="stHeader"] {
+    background: transparent !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    min-height: calc(var(--toggle-size) + var(--safe-top)) !important;
+    z-index: 999990 !important;
+    pointer-events: none !important;
+}
+
+[data-testid="stHeader"] > * {
+    pointer-events: auto !important;
+}
+
+[data-testid="stToolbar"] { visibility: hidden !important; pointer-events: none !important; }
+[data-testid="stDecoration"] { display: none !important; }
+#MainMenu { visibility: hidden; }
+footer { visibility: hidden; }
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background: var(--bg-sidebar) !important;
+    border-right: 1px solid var(--border) !important;
+    z-index: 999980 !important;
+    padding-top: var(--safe-top) !important;
+}
+[data-testid="stSidebar"] > div:first-child {
+    padding-top: clamp(1.25rem, 3vh, 2rem);
+}
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] span,
+[data-testid="stSidebar"] li {
+    color: var(--text-sub) !important;
+    font-size: 0.82rem !important;
+}
+
+[data-testid="stSidebar"] .stButton > button {
+    background: transparent !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text-sub) !important;
+    border-radius: var(--radius) !important;
+    font-family: inherit !important;
+    font-size: 0.82rem !important;
+    font-weight: 400 !important;
+    padding: 0.45rem 1rem !important;
+    min-height: 2.5rem !important;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease !important;
+    width: 100% !important;
+}
+[data-testid="stSidebar"] .stButton > button:hover {
+    border-color: var(--red) !important;
+    color: var(--red) !important;
+    background: var(--red-dim) !important;
+}
+
+/* Sidebar toggle — always visible, tappable, above overlays */
+[data-testid="stSidebarCollapse"],
+[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="collapsedControl"],
+[data-testid="stExpandSidebarButton"],
+[data-testid="stBaseButton-headerNoPadding"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 1000000 !important;
+    position: relative !important;
+    min-width: var(--toggle-size) !important;
+    min-height: var(--toggle-size) !important;
+    width: var(--toggle-size) !important;
+    height: var(--toggle-size) !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 10px !important;
+    color: var(--text) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35) !important;
+}
+
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="collapsedControl"] {
+    position: fixed !important;
+    top: max(0.5rem, var(--safe-top)) !important;
+    left: max(0.5rem, var(--safe-left)) !important;
+}
+
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapse"],
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] {
+    position: sticky !important;
+    top: max(0.4rem, var(--safe-top)) !important;
+    margin: 0.25rem 0.35rem 0.5rem auto !important;
+}
+
+/* Chatroom layout */
+.block-container {
+    max-width: var(--chat-max) !important;
+    width: 100% !important;
+    padding-top: clamp(1rem, 3vh, 2rem) !important;
+    padding-right: clamp(0.75rem, 4vw, 2rem) !important;
+    padding-bottom: calc(var(--input-reserve) + var(--safe-bottom)) !important;
+    padding-left: clamp(0.75rem, 4vw, 2rem) !important;
+    margin: 0 auto !important;
+}
+
+[data-testid="stChatMessage"] {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0.9rem 0 !important;
+    border-bottom: 1px solid var(--border) !important;
+    box-shadow: none !important;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+[data-testid="stChatMessage"]:last-child { border-bottom: none !important; }
+[data-testid="stChatMessage"] p,
+[data-testid="stChatMessage"] li {
+    color: var(--text) !important;
+    font-size: clamp(0.88rem, 2.4vw, 0.95rem) !important;
+    line-height: 1.75 !important;
+}
+[data-testid="stChatMessage"] strong { color: var(--text) !important; font-weight: 600 !important; }
+[data-testid="stChatMessage"] code {
+    background: var(--bg-card) !important;
+    color: var(--red) !important;
+    padding: 0.15rem 0.4rem !important;
+    border-radius: 5px !important;
+    font-size: 0.85rem !important;
+    border: 1px solid var(--border) !important;
+}
+[data-testid="stChatMessage"] pre {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    padding: 1rem 1.25rem !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+}
+[data-testid="stChatMessage"] pre code {
+    background: transparent !important;
+    color: var(--text) !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+/* Input bar — iOS keyboard / Android chrome / desktop */
+[data-testid="stBottom"],
+[data-testid="stBottomBlockContainer"],
+[data-testid="stChatFloatingInputContainer"] {
+    background: var(--bg) !important;
+    padding-bottom: max(0.5rem, var(--safe-bottom)) !important;
+    padding-left: max(0.5rem, var(--safe-left)) !important;
+    padding-right: max(0.5rem, var(--safe-right)) !important;
+    z-index: 999970 !important;
+}
+
+[data-testid="stChatInput"] {
+    background: transparent !important;
+    max-width: var(--chat-max) !important;
+    margin: 0 auto !important;
+    padding-inline: clamp(0.5rem, 3vw, 1rem) !important;
+}
+[data-testid="stChatInput"] > div {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 12px !important;
+    transition: border-color 0.2s ease !important;
+}
+[data-testid="stChatInput"] > div:focus-within { border-color: var(--red) !important; }
+[data-testid="stChatInput"] textarea {
+    background: transparent !important;
+    color: var(--text) !important;
+    font-family: inherit !important;
+    font-size: 16px !important; /* iOS: prevent input zoom */
+    min-height: 2.75rem !important;
+}
+[data-testid="stChatInput"] textarea::placeholder { color: var(--text-muted) !important; }
+[data-testid="stChatInput"] button {
+    color: var(--red) !important;
+    min-width: 2.5rem !important;
+    min-height: 2.5rem !important;
+}
+
+[data-testid="stTextInput"] input {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text) !important;
+    border-radius: var(--radius) !important;
+    font-family: inherit !important;
+    font-size: 16px !important;
+    min-height: 2.75rem !important;
+}
+[data-testid="stTextInput"] input:focus { border-color: var(--red) !important; box-shadow: none !important; }
+[data-testid="stTextInput"] label {
+    color: var(--text-sub) !important;
+    font-size: 0.82rem !important;
+}
+
+[data-testid="stTabs"] [data-baseweb="tab"] {
+    color: var(--text-muted) !important;
+    font-family: inherit !important;
+    font-size: 0.85rem !important;
+}
+[data-testid="stTabs"] [aria-selected="true"] {
+    color: var(--text) !important;
+    border-bottom-color: var(--red) !important;
+}
+
+.stButton > button {
+    min-height: 2.75rem !important;
+}
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* Landing / auth isolation (class injected per page) */
+.wony-public [data-testid="stSidebar"],
+.wony-public [data-testid="stSidebarNav"],
+.wony-public [data-testid="stSidebarCollapse"],
+.wony-public [data-testid="stSidebarCollapseButton"],
+.wony-public [data-testid="stSidebarCollapsedControl"],
+.wony-public [data-testid="collapsedControl"],
+.wony-public [data-testid="stExpandSidebarButton"],
+.wony-public [data-testid="stChatInput"],
+.wony-public [data-testid="stBottom"],
+.wony-public [data-testid="stBottomBlockContainer"],
+.wony-public [data-testid="stChatFloatingInputContainer"],
+.wony-public [data-testid="stChatMessage"] {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+}
+
+.wony-public [data-testid="stHeader"] {
+    min-height: 0 !important;
+    height: 0 !important;
+}
+
+.wony-public .block-container {
+    max-width: min(32.5rem, 92vw) !important;
+    padding: max(2.5rem, calc(8vh + var(--safe-top))) clamp(1rem, 5vw, 2rem) max(2rem, var(--safe-bottom)) !important;
+}
+
+/* Breakpoints */
+@media (max-width: 768px) {
+    section[data-testid="stSidebar"] {
+        width: min(86vw, 20rem) !important;
+    }
+    .block-container {
+        padding-top: clamp(3.2rem, 8vh, 4.5rem) !important;
+        padding-left: clamp(0.6rem, 3vw, 1rem) !important;
+        padding-right: clamp(0.6rem, 3vw, 1rem) !important;
+        padding-bottom: calc(6.25rem + var(--safe-bottom)) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    [data-testid="stSidebar"] .stButton > button {
+        font-size: 0.78rem !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .block-container {
+        padding-top: 2rem !important;
+        padding-bottom: calc(5.5rem + var(--safe-bottom)) !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}

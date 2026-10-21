@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Streamlit secrets (never commit)
+.streamlit/secrets.toml
+
+# Environment files
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+server_access.log
+
+# Only track WonyAI project files
+# All other scripts/tools/experiments are excluded
+app.py
+app_assistant.py
+cli_app.py
+main.py
+test_*.py
+tool_*.py
+vulnerable_app.py
+folder_acak/
